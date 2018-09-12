@@ -23,9 +23,9 @@ namespace TengDa.Communication
         /// </summary>
         public static List< TengDa.Model.BakingErrorInfo> errorModel { set; get; }
 
+        public static  int comp { get; set; } = 0;
         public static string Convert(int get)
-        {
-          
+        {     
             string ss = string.Empty;
             switch (get)
             {

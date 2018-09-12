@@ -22,7 +22,7 @@
         <Image Style="{StaticResource RightPanelBorder}" Stretch="Fill"  />
         <Grid Canvas.Left="1240" Canvas.Top="165" Width="215">
             <TextBlock Text="监控内容:" Margin="10,5,140,5"></TextBlock>
-            <ComboBox x:Name="comTepy" Margin="85,0,7,0" Width="Auto" SelectedIndex="0"></ComboBox>
+            <ComboBox x:Name="comTepy" Margin="85,0,7,0" Width="Auto" SelectedIndex="0"  ></ComboBox>
         </Grid>
         <Grid >
             <Grid.RenderTransform>

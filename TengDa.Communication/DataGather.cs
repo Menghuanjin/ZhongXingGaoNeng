@@ -188,8 +188,6 @@ namespace TengDa.Communication
         {
             if ( TengDa.Communication.SocketBLL.bakingContent[num].Connected)
             {
-                if (num == 0)
-                { }
                 int ss = Convert.ToInt16(TengDa.Communication.OMRONPLCAddress.ReadDM( TengDa.Communication.SocketBLL.bakingContent[num], "5000"));
 
                 if (ss == 2)//当前机器为异常红灯
@@ -206,7 +204,6 @@ namespace TengDa.Communication
                     TengDa.Communication.DataGather.AnalyzeGetEoor(num, TengDa.Communication.OMRONPAnalyzeDMHelp.ReadMultiToErrorInfo( TengDa.Communication.SocketBLL.bakingContent[num], 4632, 80), 3);
 
                     TengDa.Communication.DataGather.AnalyzeGetEoor(num, TengDa.Communication.OMRONPAnalyzeDMHelp.ReadMultiToErrorInfo( TengDa.Communication.SocketBLL.bakingContent[num], 4993, 1), 3);
-
                 }
             }
         }

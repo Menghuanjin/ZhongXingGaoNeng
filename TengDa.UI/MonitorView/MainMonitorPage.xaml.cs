@@ -41,8 +41,14 @@ namespace TengDa.UI
         {
             InitializeComponent();
         }
-  
-        
+
+        private List<string> comList = new List<string>()
+        {
+            "夹具监控",
+            "状态监控",
+            "搬运取代码",
+            "搬运放代码",
+        };
         private DispatcherTimer refreshTimer = new DispatcherTimer();
         #region 公共变量
         FixtureFurnaceMainDB fixtureFurnaceMainDB = new FixtureFurnaceMainDB();
@@ -206,13 +212,16 @@ namespace TengDa.UI
             this.refreshTimer.Interval = new TimeSpan(0, 0, 2);
             this.refreshTimer.Tick += new EventHandler(this.RefreshTimer_Tick);
             this.refreshTimer.Start();
+
             List<CategoryInfo> categoryList = new List<CategoryInfo>();
-            categoryList.Add(new CategoryInfo { Name = "夹具监控", Value = 0 });
-            categoryList.Add(new CategoryInfo { Name = "取放监控", Value = 1 });
+            for (int i = 0; i < comList.Count; i++)
+            {
+                categoryList.Add(new CategoryInfo { Name = comList[i], Value = i });
+            }
             this.comTepy.ItemsSource = categoryList;
             comTepy.DisplayMemberPath = "Name";
             comTepy.SelectedValuePath = "Value";
-            this.comTepy.SelectedIndex = 0;
+            this.comTepy.SelectedIndex = TengDa.Communication.APPBLL.comp;
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -231,8 +240,9 @@ namespace TengDa.UI
 
         private void RefreshTimer_Tick(object sender, EventArgs e)
         {
-        
-                var fixtureFurnaceList = fixtureFurnaceMainDB.GetAllData().OrderBy(x => x.FFMNumber).ToList();
+            TengDa.Communication.APPBLL.comp = this.comTepy.SelectedIndex;
+
+            var fixtureFurnaceList = fixtureFurnaceMainDB.GetAllData().OrderBy(x => x.FFMNumber).ToList();
 
             for (int i = 0; i < fixtureFurnaceList.Count(); i++)
             {
@@ -286,8 +296,6 @@ namespace TengDa.UI
             {
                 ChangeImgAddress(1,Convert.ToInt32(RobotStateList.RSIPosition)*2, Convert.ToInt32(RobotStateList.RSIMoveState));
             }
-
-
         }
 
         /// <summary>
@@ -373,6 +381,10 @@ namespace TengDa.UI
                         }
 
                     }
+                }
+                else if (this.comTepy.SelectedIndex == 2)
+                {
+
                 }
             }
         }
@@ -584,5 +596,7 @@ namespace TengDa.UI
             public string Name { get; set; }
             public int Value { get; set; }
         }
+
+
     }
 }
