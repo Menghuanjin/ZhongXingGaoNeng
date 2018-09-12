@@ -1,0 +1,27 @@
+﻿<Grid x:Class="TengDa.UserControls.DialogBackground"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:TengDa.UserControls" >
+    <Grid.RowDefinitions>
+        <RowDefinition Height="126"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="93"/>
+    </Grid.RowDefinitions>
+    <Canvas Grid.Row="0">
+        <Panel.Background>
+            <ImageBrush ImageSource="/TengDa.UserControls;component/Assets/dialog_header.png"/>
+        </Panel.Background>
+    </Canvas>
+    <Canvas Grid.Row="1">
+        <Panel.Background>
+            <ImageBrush ImageSource="/TengDa.UserControls;component/Assets/dialog_body.png"/>
+        </Panel.Background>
+    </Canvas>
+    <Canvas Grid.Row="2">
+        <Panel.Background>
+            <ImageBrush ImageSource="/TengDa.UserControls;component/Assets/dialog_footer.png"/>
+        </Panel.Background>
+    </Canvas>
+</Grid>

@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TengDa.WebService.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TengDa_WebService_TestSystemService_MachineAccessTestServiceService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://SAPMEAP:51000/sapdevwebservice/MachineAccessTestServiceService</Value>
+    </Setting>
+    <Setting Name="TengDa_WebService_MachineService_ExecutingServiceService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://SAPMEAP:51000/sapdevwebservice/ExecutingServiceService</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

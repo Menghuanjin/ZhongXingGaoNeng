@@ -1,0 +1,31 @@
+﻿<Grid x:Class="TengDa.UserControls.UpDownArticle"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TengDa.UserControls"
+      xmlns:xly="clr-namespace:Util.Controls;assembly=Util.Controls"
+             mc:Ignorable="d" 
+                   Opacity="0.85" >
+    <FrameworkElement.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/ButtonStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </FrameworkElement.Resources>
+    <Border CornerRadius="20,20,20,20" Background="#17F0D5" >
+        <Grid x:Name="RowsStats" Margin="2" Background="Transparent" Width="Auto" Height="Auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="{Binding Code}" VerticalAlignment="Center" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+            <Button Content="{Binding BtnName1}" Click="Button_Click" Height="34" Width="100" Style="{StaticResource MainButton}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Tag="{Binding BtnName1}"></Button>
+            <Button Content="{Binding BtnName2}" Click="Button_Click" Height="34" Width="100" Style="{StaticResource MainButton}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Tag="{Binding BtnName2}"></Button>
+            <Button Content="{Binding BtnName3}" Click="Button_Click" Height="34" Width="100" Style="{StaticResource MainButton}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Tag="{Binding BtnName3}"></Button>
+        </Grid>
+    </Border>
+</Grid>

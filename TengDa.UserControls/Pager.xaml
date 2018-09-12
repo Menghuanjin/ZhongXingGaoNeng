@@ -1,0 +1,66 @@
+﻿<Border x:Class="TengDa.UserControls.Pager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:TengDa.UserControls"
+        CornerRadius="6" BorderThickness="0" Background="#FF181979">
+    <FrameworkElement.Resources>
+        <Style x:Key="PageButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="true"/>
+            <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+            <Setter Property="ContentControl.Content" Value=""/>
+            <Setter Property="FrameworkElement.MinWidth" Value="25"/>
+            <Setter Property="FrameworkElement.Margin" Value="3,0"/>
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Name="border" CornerRadius="4" Height="30" BorderThickness="0">
+                            <TextBlock Name="textBlock" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"
+                         FontSize="14" Padding="6,0">
+                <ContentPresenter/>
+                            </TextBlock>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="UIElement.IsMouseOver" Value="true">
+                                <!--<Setter TargetName="border" Property="Border.Background" Value="#0689f5"/>
+                                <Setter TargetName="textBlock" Property="TextBlock.Foreground" Value="#FFF"/> FontWeight="Bold"-->
+                                <Setter TargetName="textBlock" Property="TextBlock.FontSize" Value="18"/>
+                                <Setter TargetName="textBlock" Property="TextBlock.FontWeight" Value="Bold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CurrentPageButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="true"/>
+            <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+            <Setter Property="ContentControl.Content" Value=""/>
+            <Setter Property="FrameworkElement.MinWidth" Value="30"/>
+            <Setter Property="FrameworkElement.Margin" Value="3,0"/>
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Name="border"  CornerRadius="4" Height="30" BorderThickness="0">
+                            <TextBlock Name="textBlock" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"
+                         FontSize="18" Padding="6,0" FontWeight="Bold">
+                <ContentPresenter/>
+                            </TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </FrameworkElement.Resources>
+    <StackPanel Orientation="Horizontal" Margin="6,3">
+        <Button Click="PageButton_Click" x:Name="btnFirstPage" Content="|&lt;&lt;"
+            Style="{StaticResource PageButtonStyle}" ToolTip="首页"/>
+        <Button Click="PageButton_Click" x:Name="btnPrevPage" Content="&lt;&lt;&lt;"
+            Style="{StaticResource PageButtonStyle}" ToolTip="上一页"/>
+        <StackPanel x:Name="pageNumbers" Orientation="Horizontal"/>
+        <Button Click="PageButton_Click" x:Name="btnNextPage" Content="&gt;&gt;&gt;"
+            Style="{StaticResource PageButtonStyle}" ToolTip="下一页"/>
+        <Button Click="PageButton_Click" x:Name="btnLastPage" Content="&gt;&gt;|" Style="{StaticResource PageButtonStyle}" ToolTip="尾页"/>
+    </StackPanel>
+</Border>

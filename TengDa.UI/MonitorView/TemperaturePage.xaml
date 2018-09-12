@@ -1,0 +1,227 @@
+﻿<controls:BasePage x:Class="TengDa.UI.MonitorView.TemperaturePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TengDa.UI.MonitorView"
+                   xmlns:controls="clr-namespace:TengDa.UserControls;assembly=TengDa.UserControls"   
+               xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      mc:Ignorable="d" 
+         Title="TemperaturePage"  Loaded="BasePage_Loaded" Unloaded="BasePage_Unloaded_1">
+    <FrameworkElement.Resources>
+        <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource BaseDataGridStyle}">
+            <Setter Property="FrameworkElement.MaxWidth" Value="1145"/>
+            <Setter Property="FrameworkElement.Height" Value="202"/>
+        </Style>
+        <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource DataGridCellStyle}">
+            <Setter Property="Control.Padding" Value="6"/>
+        </Style>
+        <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource DataGridColumnHeaderStyle}"/>
+        <Style x:Key="FilterTextStyle" TargetType="{x:Type Label}">
+            <Setter Property="Control.FontSize" Value="14"/>
+            <Setter Property="Control.Foreground" Value="White"/>
+            <Setter Property="Control.Padding" Value="8,0"/>
+            <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="ReportTitleStyle" TargetType="{x:Type Label}">
+            <Setter Property="Control.FontSize" Value="14"/>
+            <Setter Property="Control.Foreground" Value="White"/>
+            <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+            <Setter Property="Control.FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseTextBoxStyle}">
+            <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+            <Setter Property="FrameworkElement.Width" Value="166"/>
+            <Setter Property="FrameworkElement.Height" Value="23"/>
+            <Setter Property="Control.FontSize" Value="14"/>
+        </Style>
+        <Style TargetType="{x:Type DatePicker}">
+            <Setter Property="FrameworkElement.MinHeight" Value="26"/>
+            <Setter Property="FrameworkElement.Height" Value="23"/>
+            <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="DatePicker.IsTodayHighlighted" Value="true"/>
+            <Setter Property="Control.Padding" Value="0"/>
+            <Setter Property="FrameworkElement.Margin" Value="0"/>
+            <Setter Property="DatePicker.SelectedDate" Value="{x:Null}"/>
+            <Setter Property="Control.FontSize" Value="14"/>
+            <Setter Property="UIElement.SnapsToDevicePixels" Value="true"/>
+            <Setter Property="Control.BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                        <GradientStop Color="#24bdfa" Offset="0"/>
+                        <GradientStop Color="#FFFFCB97" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DatePicker}">
+                        <Grid x:Name="PART_Root" Margin="0" Background="Transparent">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Rectangle RadiusX="5" RadiusY="5" Fill="White" Stroke="#0f93e7" StrokeThickness="2" Grid.Column="0"/>
+                            <Grid x:Name="PART_InnerGrid" Margin="0" Column="0" Background="Transparent">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <DatePickerTextBox x:Name="PART_TextBox" Focusable="false" HorizontalAlignment="Stretch" Margin="4,0"
+                                   SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" IsHitTestVisible="true"
+                                   IsReadOnly="true" VerticalAlignment="Center" FontFamily="{TemplateBinding Control.FontFamily}"
+                                   Foreground="{TemplateBinding Control.Foreground}" FontSize="{TemplateBinding Control.FontSize}"
+                                   BorderThickness="0" Background="Transparent"
+                                   Text="{Binding Path=SelectedDate, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, StringFormat='yyyy-MM-dd'}"/>
+                                <ToggleButton Grid.Column="0" IsTabStop="false" Style="{StaticResource DatePickerToggleButtonStyle}"
+                              ClickMode="Press" Background="Transparent"
+                              IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <Popup x:Name="PART_Popup" Focusable="false" AllowsTransparency="true" Placement="Bottom"
+                       StaysOpen="false" PopupAnimation="Slide" PlacementTarget="{Binding ElementName=PART_TextBox}"/>
+                            </Grid>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </FrameworkElement.Resources>
+    <Canvas RenderTransformOrigin="24.5,16.75">
+        <Image Style="{StaticResource RightPanelBorder}"  Stretch="Fill" />
+        <Border CornerRadius="20,20,20,20" Background="#FF2B2DB4" Height="Auto" Canvas.Left="350" Canvas.Top="160" x:Name="bgImg">
+            <Canvas x:Name="header" Style="{StaticResource TabHeaderStyle1}">
+                <Label Style="{StaticResource TabTitleStyle1}" Content="实时温度"/>
+                <StackPanel Orientation="Horizontal" Canvas.Left="752" Canvas.Top="5">
+
+
+                    <Label Style="{StaticResource TabTitleStyle1}" Content="机台:" Canvas.Left="339" Canvas.Top="5"/>
+                    <ComboBox  Canvas.Left="400" Canvas.Top="5" Width="145" x:Name="comMachine"  ></ComboBox>
+
+                    <Label Style="{StaticResource TabTitleStyle1}" Content="层号:" Canvas.Left="629" Canvas.Top="5"/>
+                    <ComboBox Width="145" x:Name="comStorey"  />
+                </StackPanel>
+            </Canvas>
+        </Border>
+        <Border Grid.Column="0" Grid.Row="1" CornerRadius="20" BorderThickness="1" BorderBrush="#5fe4fa" Height="278" Canvas.Left="345" Canvas.Top="490" Width="1175">
+
+            <lvc:CartesianChart x:Name="temperatureChart" Margin="8,19,9,-43" Grid.Row="1" LegendLocation="None" Series="{Binding TemperatureSeries}">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="编号探头" FontSize="14" Labels="{Binding TemperatureLabels}"/>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="温度" FontSize="14" LabelFormatter="{Binding TemperatureFormatter}"/>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+        </Border>
+        <Grid Width="1097" Canvas.Top="219" Height="261" Canvas.Left="383">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左1" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左2" VerticalAlignment="Top" Grid.Column="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左3" VerticalAlignment="Top" Grid.Column="2"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左4" VerticalAlignment="Top" Grid.Column="3"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左5" VerticalAlignment="Top" Grid.Column="4"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左6" VerticalAlignment="Top" Grid.Column="5"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左7" VerticalAlignment="Top" Grid.Column="6"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左8" VerticalAlignment="Top" Grid.Column="7"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左9" VerticalAlignment="Top" Grid.Column="8"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左10" VerticalAlignment="Top" Grid.Column="9"/>
+            <TextBox x:Name="textLeft1" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+            <TextBox x:Name="textLeft2" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="1"/>
+            <TextBox x:Name="textLeft3" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="2"/>
+            <TextBox x:Name="textLeft4" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="3"/>
+            <TextBox x:Name="textLeft5" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="4"/>
+            <TextBox x:Name="textLeft6" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="5"/>
+            <TextBox x:Name="textLeft7" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="6"/>
+            <TextBox x:Name="textLeft8" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="7"/>
+            <TextBox x:Name="textLeft9" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="8"/>
+            <TextBox x:Name="textLeft10" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Grid.Column="9"/>
+
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左11" Grid.Row="2"  VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左12" Grid.Row="2" VerticalAlignment="Top" Grid.Column="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左13" Grid.Row="2" VerticalAlignment="Top" Grid.Column="2"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左14" Grid.Row="2" VerticalAlignment="Top" Grid.Column="3"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左15" Grid.Row="2" VerticalAlignment="Top" Grid.Column="4"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左16" Grid.Row="2" VerticalAlignment="Top" Grid.Column="5"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左17" Grid.Row="2" VerticalAlignment="Top" Grid.Column="6"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左18" Grid.Row="2" VerticalAlignment="Top" Grid.Column="7"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左19" Grid.Row="2" VerticalAlignment="Top" Grid.Column="8"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="左20" Grid.Row="2" VerticalAlignment="Top" Grid.Column="9"/>
+            <TextBox x:Name="textLeft11" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90"/>
+            <TextBox x:Name="textLeft12" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="1"/>
+            <TextBox x:Name="textLeft13" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="2"/>
+            <TextBox x:Name="textLeft14" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="3"/>
+            <TextBox x:Name="textLeft15" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="4"/>
+            <TextBox x:Name="textLeft16" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="5"/>
+            <TextBox x:Name="textLeft17" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="6"/>
+            <TextBox x:Name="textLeft18" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Grid.Column="7"/>
+            <TextBox x:Name="textLeft19" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Grid.Column="8"/>
+            <TextBox x:Name="textLeft20" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="9"/>
+
+
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右1" Grid.Row="4"  VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右2" Grid.Row="4" VerticalAlignment="Top" Grid.Column="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右3" Grid.Row="4" VerticalAlignment="Top" Grid.Column="2"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右4" Grid.Row="4" VerticalAlignment="Top" Grid.Column="3"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右5" Grid.Row="4" VerticalAlignment="Top" Grid.Column="4"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右6" Grid.Row="4" VerticalAlignment="Top" Grid.Column="5"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右7" Grid.Row="4" VerticalAlignment="Top" Grid.Column="6"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右8" Grid.Row="4" VerticalAlignment="Top" Grid.Column="7"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右9" Grid.Row="4" VerticalAlignment="Top" Grid.Column="8"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右10" Grid.Row="4" VerticalAlignment="Top" Grid.Column="9"/>
+            <TextBox x:Name="textRight1" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90"/>
+            <TextBox x:Name="textRight2" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="1"/>
+            <TextBox x:Name="textRight3" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Grid.Column="2"/>
+            <TextBox x:Name="textRight4" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="3"/>
+            <TextBox x:Name="textRight5" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="4"/>
+            <TextBox x:Name="textRight6" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="5"/>
+            <TextBox x:Name="textRight7" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="6"/>
+            <TextBox x:Name="textRight8" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="7"/>
+            <TextBox x:Name="textRight9" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="8"/>
+            <TextBox x:Name="textRight10" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="9"/>
+
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右11" Grid.Row="6"  VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右12" Grid.Row="6" VerticalAlignment="Top" Grid.Column="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右13" Grid.Row="6" VerticalAlignment="Top" Grid.Column="2"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右14" Grid.Row="6" VerticalAlignment="Top" Grid.Column="3"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右15" Grid.Row="6" VerticalAlignment="Top" Grid.Column="4"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右16" Grid.Row="6" VerticalAlignment="Top" Grid.Column="5"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右17" Grid.Row="6" VerticalAlignment="Top" Grid.Column="6"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右18" Grid.Row="6" VerticalAlignment="Top" Grid.Column="7"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右19" Grid.Row="6" VerticalAlignment="Top" Grid.Column="8"/>
+            <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="右20" Grid.Row="6" VerticalAlignment="Top" Grid.Column="9"/>
+            <TextBox x:Name="textRight11" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90"/>
+            <TextBox x:Name="textRight12" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="1"/>
+            <TextBox x:Name="textRight13" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="2"/>
+            <TextBox x:Name="textRight14" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="3"/>
+            <TextBox x:Name="textRight15" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="4"/>
+            <TextBox x:Name="textRight16" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="5"/>
+            <TextBox x:Name="textRight17" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="6"/>
+            <TextBox x:Name="textRight18" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Grid.Column="7"/>
+            <TextBox x:Name="textRight19" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="8"/>
+            <TextBox x:Name="textRight20" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Top" Width="90" Grid.Column="9"/>
+
+        </Grid>
+    </Canvas>
+</controls:BasePage>

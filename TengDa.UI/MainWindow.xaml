@@ -1,0 +1,159 @@
+﻿<Window x:Class="TengDa.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TengDa.UI"
+      xmlns:xly="clr-namespace:Util.Controls;assembly=Util.Controls"
+        xmlns:vc="clr-namespace:TengDa.UI.ValueConvert"
+        mc:Ignorable="d"
+        Height="900" Width="1600" WindowStyle="None"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowState="Maximized"
+        Title="MainWindow" Loaded="MainWindow_Loaded" MouseDown="Window_MouseDown" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <vc:VCItemIsCheckedColor x:Key="vcColor"/>
+            <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Style>
+            <Style x:Key="ListViewStyle1" TargetType="{x:Type ListView}">
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+                <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+                <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            </Style>
+            <Style x:Key="lviStyle" TargetType="{x:Type ListViewItem}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                            <Border Name="Bd"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            SnapsToDevicePixels="true">
+                                <StackPanel Orientation="Horizontal">
+                                    <Border CornerRadius="5,5,5,5" Background="{Binding IsChecked,Converter={StaticResource vcColor}}" Canvas.Left="1480" Canvas.Top="85" Width="20" Height="20"/>
+                                    <TextBlock Text="{Binding PageTitle}" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"/>
+                                </StackPanel>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <!--<MultiTrigger>
+                        <MultiTrigger.Conditions>
+                            <Condition Property="ItemsControl.AlternationIndex" Value="1" />
+                            <Condition Property="IsSelected" Value="False" />
+                            <Condition Property="IsMouseOver" Value="False" />
+                        </MultiTrigger.Conditions>
+                        <Setter Property="Background" Value="LightBlue" />
+                    </MultiTrigger>-->
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="SkyBlue" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <HierarchicalDataTemplate x:Key="ItemNode" ItemsSource="{Binding Children}">
+                <StackPanel Orientation="Horizontal" Height="28">
+                    <xly:FImage Source="{Binding Icon}" Width="22" Height="22" Margin="10,0,5,0"></xly:FImage>
+                    <TextBlock Text="{Binding Text}" FontSize="16" VerticalAlignment="Center" Margin="3,0,0,0" FontWeight="{Binding FontWeight}" ></TextBlock>
+                </StackPanel>
+            </HierarchicalDataTemplate>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/HomeStyle.xaml" />
+                <ResourceDictionary Source="Themes/ListBoxStyle.xaml" />
+                <ResourceDictionary Source="Themes/NavBarStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Viewbox Stretch="Fill">
+        <Canvas Width="1600" Height="900">
+            <Panel.Background>
+                <ImageBrush ImageSource="/TengDa.UI;component/image/Background.png"/>
+            </Panel.Background>
+            <StackPanel Width="1600" Height="75"   Canvas.Left="0" Opacity="0.8" Canvas.Top="0" Background="#1E71B1">
+                <TextBlock Text="腾达自动烘烤线系统"   FontSize="36" FontWeight="Bold" HorizontalAlignment="Left" Margin=" 20, 12, 0, 0" VerticalAlignment="Center" Foreground="White" />
+            </StackPanel>
+            <Frame x:Name="mainPage" Width="1600" Height="900" NavigationUIVisibility="Hidden" Content=""/>
+            <Border Opacity="0.85" CornerRadius="10,10,10,10" BorderThickness="2" BorderBrush="#FF2829A3" Canvas.Left="53" Canvas.Top="108" Background="Transparent" Padding="5" >
+                <!--<StackPanel x:Name="menus" Margin="4" Background="Transparent" Width="237" Height="680" />-->
+                <TreeView Name="tvwMenu" LostFocus="tvwMenu_LostFocus" Background="#FF2224E2" Opacity="0.8" Width="237" Height="680" ItemTemplate="{StaticResource ItemNode}" Padding="10,10,0,0" SelectedItemChanged="tvwMenu_SelectedItemChanged" BorderThickness="0">
+                </TreeView>
+            </Border>
+            <Border Visibility="Hidden" CornerRadius="20,20,20,20" BorderThickness="1" BorderBrush="SkyBlue" Background="#FF2B2DB4" Canvas.Left="330" Canvas.Top="85" x:Name="bgImg" Width="1200" Height="45">
+                <ItemsControl Name="pageItem">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal">
+                            </StackPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="{Binding CRNum}" Background="{Binding IsChecked,Converter={StaticResource vcColor}}" Canvas.Left="350" Canvas.Top="85" x:Name="bgImg" BorderThickness="0,0,1,0"  >
+                                <!-- FF207BBC!-->
+                                <StackPanel Orientation="Horizontal"  >
+                                    <TextBlock Text="{Binding PageTitle}" VerticalAlignment="Center" Margin="20,0,0,0"  Name="txtPage" MouseLeftButtonDown="txtPage_MouseLeftButtonDown" Tag="{Binding .}" FontSize="16" Foreground="White" FontWeight="Bold" />
+                                    <Button Click="btnClose_Click" x:Name="btnClose" Content="X" VerticalAlignment="Center" Margin="10,0,10,0" Background="Transparent" Foreground="White" FontWeight="Bold" Height="23" Tag="{Binding .}" BorderThickness="0"/>
+                                    <Popup IsOpen="{Binding IsChecked}" PlacementTarget="{Binding ElementName=txtPage}"  AllowsTransparency="True" PopupAnimation="Fade" HorizontalOffset="-4" VerticalOffset="12" >
+                                        <Border CornerRadius="20,20,0,0"  Width="{Binding ItemWidth}" Height="8" Background="{Binding IsChecked,Converter={StaticResource vcColor}}">
+                                        </Border>
+                                    </Popup>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Border>
+            <Border Name="bdrMenu" Visibility="Hidden" CornerRadius="0,20,20,0" Background="#FF207BBC" Canvas.Left="1496" Canvas.Top="85" Width="50" Height="45" BorderThickness="0,1,1,1" BorderBrush="SkyBlue">
+                <Grid>
+                    <Image Source="image/more.png" Width="26" Name="imgMore" MouseLeftButtonDown="imgMore_MouseLeftButtonDown" >
+                        <!--<Image.ContextMenu>
+                            <ContextMenu x:Name="menu">
+                                <MenuItem Header="MenuItem-0">
+                                    <MenuItem Header="MenuItem-0-0"/>
+                                    <MenuItem Header="MenuItem-0-1"/>
+                                    <MenuItem Header="MenuItem-0-2"/>
+                                </MenuItem>
+                                <MenuItem Header="MenuItem-1"/>
+                            </ContextMenu>
+                        </Image.ContextMenu>-->
+                    </Image>
+                    <Popup x:Name="popusBottom" PlacementTarget="{Binding ElementName=imgMore}" AllowsTransparency="True" PopupAnimation="Fade" HorizontalOffset="-80" VerticalOffset="12"  >
+                        <ListView Name="lvwMenu" Width="150" ItemContainerStyle="{StaticResource lviStyle}" Background="#FF2355DC" SelectionChanged="lvwMenu_SelectionChanged" BorderThickness="0" >                            
+                            <ListView.View>
+                                <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}" >
+                                    <!--<GridView.Columns>
+                                        <GridViewColumn>
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Border CornerRadius="5,5,5,5" Background="{Binding IsChecked,Converter={StaticResource vcColor}}" Canvas.Left="1480" Canvas.Top="85" Width="20" Height="20"/>
+                                                        <TextBlock Text="{Binding PageTitle}" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="Bold"/>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView.Columns>-->
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Popup>
+                </Grid>
+            </Border>
+            
+            <Button x:Name="btnExit" Template="{StaticResource btnTitleUnSelectedControlTemplate}" ContentTemplate="{StaticResource btnTitleContentTemplate}"  Height="75" Width="75" Canvas.Left="1515" />
+            <Button x:Name="btnMinimum"  Template="{StaticResource btnTitleUnSelectedControlTemplate}" ContentTemplate="{StaticResource btnTitleContentTemplate}"   Height="75" Width="75" Canvas.Left="1435" />
+            <Button x:Name="btnSwitchUser" Template="{StaticResource btnTitleUnSelectedControlTemplate}" ContentTemplate="{StaticResource btnTitleContentTemplate}" Canvas.Left="1354"  Height="75" Width="75" />
+            <!--<Button x:Name="btnHome" Template="{StaticResource btnTitleSelectedControlTemplate}" ContentTemplate="{StaticResource btnTitleContentTemplate}" Canvas.Left="1354"  Height="75" Width="75" />-->
+            <StackPanel Width="1600" Height="45"   Canvas.Left="0" Opacity="0.8" Canvas.Top="860" Background="#1E71B1" Orientation="Horizontal">
+                <TextBlock  x:Name="SysTime" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" Margin=" 20, 8, 0, 0" VerticalAlignment="Center" Foreground="White" />
+                <TextBlock Text="{Binding UserName,StringFormat='{}操作用户：{0}' }"  FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" Margin="1050, 8, 0, 0" VerticalAlignment="Center" Foreground="White" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" />
+                <TextBlock Text="{Binding RoleName,StringFormat='{}所属权限组：{0}' }"   FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" Margin=" 10, 8, 0, 0" VerticalAlignment="Center" Foreground="White" />
+            </StackPanel>
+        </Canvas>
+    </Viewbox>
+</Window>

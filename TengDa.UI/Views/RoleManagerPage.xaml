@@ -1,0 +1,62 @@
+﻿<controls:BasePage x:Class="TengDa.UI.RoleManagerPage"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:local="clr-namespace:TengDa.UI"
+                       xmlns:xly="clr-namespace:Util.Controls;assembly=Util.Controls"
+                   xmlns:controls="clr-namespace:TengDa.UserControls;assembly=TengDa.UserControls"
+                   Loaded="Page_Loaded" Title="RoleManagerPage">
+    <FrameworkElement.Resources>
+    </FrameworkElement.Resources>
+    <Canvas>
+        <Image  Style="{StaticResource RightPanelBorder}" Stretch="Fill" />
+        <Border CornerRadius="20,20,20,20" Background="#FF2B2DB4" Height="Auto" Canvas.Left="350" Canvas.Top="160" x:Name="bgImg">
+            <Canvas x:Name="header" Style="{StaticResource TabHeaderStyle1}">
+                <Label Style="{StaticResource TabTitleStyle1}" Content="角色列表"/>
+                <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Canvas.Right="60" Canvas.Top="7" >
+                    <!--<Button Click="btnAdd_Click" x:Name="btnAdd" Content="添加" Style="{StaticResource BaseHeaderButtonStyle}"/>
+                    <Button Content="查询" Style="{StaticResource BaseHeaderButtonStyle}"/>-->
+                    <xly:FButton FIcon="&#xe61a;" CornerRadius="5" Background="#12B512" MouseOverBackground="#08EE08" Click="btnAdd_Click">添加</xly:FButton>
+                    <xly:FButton FIcon="&#xe628;" CornerRadius="5" Background="BlueViolet" Margin="10,0,10,0">查询</xly:FButton>
+                </StackPanel>
+            </Canvas>
+        </Border>
+      <!-- <DataGrid  x:Name="dataGrid" BorderThickness="1"  FontSize="14">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="IDEN"  Width="*" Binding="{Binding RoleId}"  />
+                <DataGridTextColumn Header="名称" Width="2*" 
+                            Binding="{Binding RoleName}"/>
+                <DataGridTextColumn Header="备注"   Width="2*" Binding="{Binding Remark}"/>
+                <DataGridTextColumn Header="操作"  Width="2*" Binding="{Binding Operate}"/>
+            </DataGrid.Columns>
+        </DataGrid>-->
+        <DataGrid x:Name="dataGrid" BorderThickness="1"  FontSize="14">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="IDEN"  Width="*" Binding="{Binding RoleId}"  />
+                <DataGridTextColumn Header="名称" Width="2*" 
+                            Binding="{Binding RoleName}"/>
+                <DataGridTextColumn Header="备注"   Width="2*" Binding="{Binding Remark}"/>    
+                <DataGridTemplateColumn Header="操作" Width="1.5*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <!--<Button Style="{StaticResource CellLinkButtonStyle}" Content="修改"
+                        Name="btnEdit" Click="btnEdit_Click"
+                        Tag="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>-->
+
+                                <xly:FButton FIcon="&#xe657;" Margin="3" Style="{StaticResource FButton_LinkButton}" Foreground="WhiteSmoke" Click="btnEdit_Click"
+                        Tag="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></xly:FButton>
+                                <xly:FButton FIcon="&#xe63b;" Padding="5" Margin="3" Style="{StaticResource FButton_LinkButton}" Foreground="WhiteSmoke" Click="btnDel_Click"
+                        Tag="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></xly:FButton>
+                                <!--<Button Style="{StaticResource CellLinkButtonStyle}" Content="删除" Name="btnDel" Click="btnDel_Click"
+                        Tag="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>-->
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <controls:Pager x:Name="pager" Style="{StaticResource PagerStyle1}" Visibility="Collapsed"/>
+    </Canvas>
+</controls:BasePage>

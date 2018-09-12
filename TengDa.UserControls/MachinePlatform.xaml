@@ -1,0 +1,46 @@
+﻿<Grid x:Class="TengDa.UserControls.MachinePlatform"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TengDa.UserControls"
+             mc:Ignorable="d" 
+             Opacity="0.85" >
+    <FrameworkElement.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/ButtonStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </FrameworkElement.Resources>
+    <Border CornerRadius="20,20,20,20" Background="#17F0D5" >
+        <Grid x:Name="RowsStats" Margin="2" Background="Transparent" Width="Auto"  Height="Auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Image Source="{Binding ImgSource}" Stretch="None" Grid.Column="1" Height="45" ToolTip="{Binding TipInfo}" />
+            <TextBlock Text="{Binding IndexName}" VerticalAlignment="Center" Margin="5,0,0,0"  HorizontalAlignment="Right" Foreground="White" FontSize="16"/>
+
+            <ItemsControl Grid.Row="1" Grid.ColumnSpan="2" Name="btnItems" ItemsSource="{Binding TempBtnData}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="40">
+                            <Button Content="{Binding MainBtnInfo.TempNum}"  Style="{Binding MainBtnInfo.BtnStyle}" Height="Auto" Margin="5,0,5,5" Tag="{Binding MainBtnInfo}" Click="Button_Click" Opacity="{Binding MainBtnInfo.OpacityNum}" Background="{Binding MainBtnInfo.BtnColor}" />
+                            <!--<Button Content="{Binding BackBtnInfo.TempNum}" Style="{Binding BackBtnInfo.BtnStyle}" Grid.Column="1" Tag="{Binding BackBtnInfo}" Click="Button_Click"  Opacity="{Binding BackBtnInfo.OpacityNum}" Background="{Binding BackBtnInfo.BtnColor}" />-->
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Border>
+</Grid>

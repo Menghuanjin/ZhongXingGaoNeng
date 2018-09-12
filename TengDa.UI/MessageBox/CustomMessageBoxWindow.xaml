@@ -1,0 +1,61 @@
+﻿<xly:WindowBase x:Class="TengDa.UI.MessageBox.CustomMessageBoxWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TengDa.UI"
+       xmlns:xly="clr-namespace:Util.Controls;assembly=Util.Controls"
+        mc:Ignorable="d" Title="{Binding MessageBoxTitel}"
+         Style="{StaticResource DefaultWindowStyle}"  Name="WindowBase"  WindowStartupLocation="CenterScreen"  Height="275.604" Width="661.207" >
+    <FrameworkElement.Resources>
+        <HierarchicalDataTemplate x:Key="Module" ItemsSource="{Binding Children}">
+            <StackPanel Orientation="Horizontal" Margin="0,3">
+                <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsChecked,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Margin="3,0" VerticalAlignment="Center" Text="{Binding PermissionName}"/>
+            </StackPanel>
+        </HierarchicalDataTemplate>
+
+    </FrameworkElement.Resources>
+    <Grid Margin="0,-18,10,3">
+        <Canvas Grid.Column="0" Grid.Row="0" Margin="0,0,0,286">
+            <!--<Button Click="btnClose_Click" x:Name="btnClose" Style="{StaticResource DialogCloseButtonStyle}" Canvas.Left="527" Width="109" Canvas.Top="5"/>
+            <Label x:Name="dialogTitle" Content="{Binding MessageBoxTitel}" Style="{StaticResource DialogTitle}"/>-->
+            <Grid Width="589" Canvas.Top="47" Height="180" Canvas.Left="18">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <!--显示图片和文本-->
+                <StackPanel Grid.Row="0" VerticalAlignment="Center" Orientation="Horizontal" Height="186" Margin="0,-56,0,0">
+                    <Image Source="{Binding ImagePath}" Width="62" Height="62" Margin="40,76,20,48"/>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="WrapWithOverflow" Width="419" TextAlignment="Left"
+                       Text="{Binding MessageBoxText}" TextBlock.Foreground="White" TextBlock.FontSize="22"  Margin="0,38,0,10" Height="138"/>
+                </StackPanel>
+                <!--Button Margin(坐上右下)-->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,129,0,2" Grid.RowSpan="2">
+                    <!--<Button Content="确 定" x:Name="OkButton" Width="115" Click="OkButton_Click" Margin="10,0,15,10" IsDefault="True"
+                    Visibility="{Binding OkButtonVisibility,Mode=OneWay}" Style="{StaticResource BaseDialogButtonStyle}"/>-->
+
+                    <!--<Button Content="是" x:Name="YesButton" Width="115" Click="YesButton_Click" Margin="10,0,15,10" 
+                    Visibility="{Binding YesButtonVisibility,Mode=OneWay}" Style="{StaticResource BaseDialogButtonStyle}"/>-->
+                    <!--<Button Content="否" x:Name="NoButton" Width="115" Click="NoButton_Click" Margin="10,0,15,10"
+                    Visibility="{Binding NoButtonVisibility,Mode=OneWay}" Style="{StaticResource BaseDialogButtonStyle}"/>-->
+                    <!--<Button Content="取消" x:Name="CancelButton" Width="115" Click="CancelButton_Click" Margin="10,0,15,10"
+                    Visibility="{Binding CancelButtonVisibility}" Style="{StaticResource BaseDialogButtonStyle}"/>-->
+
+                    <xly:FButton FIcon="&#xe62a;" Content="确 定" x:Name="OkButton" Width="115" Click="OkButton_Click" Margin="10,0,15,10" IsDefault="True"
+                    Visibility="{Binding OkButtonVisibility,Mode=OneWay}" />
+                    <xly:FButton FIcon="&#xe62a;"  Content="是" x:Name="YesButton" Width="115" Click="YesButton_Click" Margin="10,0,15,10" 
+                     Visibility="{Binding YesButtonVisibility,Mode=OneWay}" />
+                    <xly:FButton FIcon="&#xE60A;" Content="否" x:Name="NoButton" Width="115" Click="NoButton_Click" Margin="10,5,15,15"
+                     Visibility="{Binding NoButtonVisibility, Mode=OneWay}"  />
+                    <xly:FButton FIcon="&#xe666;"  Content="取消" x:Name="CancelButton" Width="115" Click="CancelButton_Click" Margin="10,5,15,15"
+                    Visibility="{Binding CancelButtonVisibility}"  />
+
+                </StackPanel>
+            </Grid>
+        </Canvas>
+
+
+    </Grid>
+</xly:WindowBase>

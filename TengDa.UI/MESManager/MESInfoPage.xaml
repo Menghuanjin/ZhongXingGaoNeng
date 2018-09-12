@@ -1,0 +1,101 @@
+﻿<controls:BasePage
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TengDa.UI"
+      xmlns:controls="clr-namespace:TengDa.UserControls;assembly=TengDa.UserControls"
+      xmlns:vc="clr-namespace:TengDa.UI.ValueConvert"
+       xmlns:xly="clr-namespace:Util.Controls;assembly=Util.Controls"
+      xmlns:UDateTime="clr-namespace:TengDa.UserControls;assembly=TengDa.UserControls" x:Class="TengDa.UI.MESManager.MESInfoPage"
+      mc:Ignorable="d"
+      Title="MESInfoPage">
+    <controls:BasePage.Resources>
+        <vc:VCPLCStateConvertName x:Key="vcPLC"/>
+        <vc:VCYesOrNoConvertName x:Key="vcYesOrNo"/>
+        <vc:VCBerthPositionConvertName x:Key="vcBerthPosition"/>
+        <vc:VCPPMStateConvertName x:Key="vcPPMState"/>
+        <vc:VCCreateTypeConvertName x:Key="vcCreateType"/>
+    </controls:BasePage.Resources>
+    <Canvas>
+        <Image Style="{StaticResource RightPanelBorder}" Stretch="Fill"  />
+        <Image x:Name="image"   Source="TengDa.UserControls/assets/stop.png" Canvas.Left="1399" Canvas.Top="665"  />
+        <Border CornerRadius="20,20,20,20" Background="#FF2B2DB4" Height="Auto" Canvas.Left="350" Canvas.Top="160" x:Name="bgImg">
+            <Canvas x:Name="header" Style="{StaticResource TabHeaderStyle1}">
+                <Label Style="{StaticResource TabTitleStyle1}" Content="MES信息配置"/>
+                <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Canvas.Right="60" Canvas.Top="7" >
+                    <!--<Button Click="btnAdd_Click" x:Name="btnAdd" Content="添加" Style="{StaticResource BaseHeaderButtonStyle}"/>
+                    <Button Content="查询" Style="{StaticResource BaseHeaderButtonStyle}"/>-->
+                    <xly:FButton FIcon="&#xe61a;" CornerRadius="5" Background="#12B512" MouseOverBackground="#08EE08" Click="buttRevise_Click" >修改</xly:FButton>
+                    <xly:FButton FIcon="&#xE628;" CornerRadius="5" Background="BlueViolet" Margin="10,0,10,0"  x:Name="buttQuery"  Click="buttQuery_Click"  Content="查询"/>
+                </StackPanel>
+            </Canvas>
+        </Border>
+
+        <Grid Width="989" Canvas.Top="250" Height="195" Canvas.Left="355">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="入站访问Url：" RenderTransformOrigin="1,0.792" Canvas.Left="375" Canvas.Top="285" Margin="0,20,5,0" HorizontalAlignment="Right" Width="80"/>
+            <TextBlock Text="出站访问Url：" RenderTransformOrigin="1,0.792" Canvas.Left="375" Canvas.Top="285" Margin="0,20,5,0" Grid.Row="1"/>
+            <TextBlock Text="设备状态Url：" RenderTransformOrigin="1,0.792" Canvas.Left="375" Canvas.Top="285" Margin="0,20,5,0" Grid.Row="2"/>
+            <TextBox x:Name="txtIn"   xly:ControlAttachProperty.Watermark="请输入入站Url" Grid.Column="1" Text="{Binding InUrl}" Width="Auto" Margin="10,0,20,12" Height="30" VerticalAlignment="Bottom" />
+            <TextBox x:Name="txtOut"   xly:ControlAttachProperty.Watermark="请输入出站Url" Grid.Column="1" Text="{Binding OutUrl}" Width="Auto" Margin="10,0,20,12" Height="30" VerticalAlignment="Bottom" Grid.Row="1" />
+            <TextBox x:Name="txtMachine"   xly:ControlAttachProperty.Watermark="请输入机器状态Url" Grid.Column="1" Text="{Binding MachineUrl}" Width="Auto" Margin="10,0,20,12" Height="30" VerticalAlignment="Bottom" Grid.Row="2" />
+        </Grid>
+
+
+        <Grid Width="1018" Canvas.Top="455" Height="267" Canvas.Left="324">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="230"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="230"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="230"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock  x:Name="FFMState" Grid.Column="0" Grid.Row="0" Text="登录账户：" Margin="20,17,3,19"/>
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="入站工厂代码：" Height="20" RenderTransformOrigin="1,0.792" Margin="20,17,5,0" VerticalAlignment="Top"/>
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="入站接口标示：" Height="20" RenderTransformOrigin="1,0.792" Margin="20,17,5,0" VerticalAlignment="Top"/>
+            <TextBlock Grid.Column="0" Grid.Row="3" Text="入站设备编号：" Height="20" RenderTransformOrigin="1,0.792" Margin="20,17,5,0" VerticalAlignment="Top"/>
+            <TextBlock Grid.Column="2" Text="登录密码：" Height="20" RenderTransformOrigin="1,0.792" Margin="20,20,6,0" VerticalAlignment="Top"/>
+            <TextBlock Grid.Column="2" Text="出站工厂代码：" Height="20" RenderTransformOrigin="1,0.792" Margin="15,20,10,0" VerticalAlignment="Top" Grid.Row="1"/>
+            <TextBlock Grid.Column="2" Text="出站接口标示：" Height="20" RenderTransformOrigin="1,0.792" Margin="15,20,10,0" VerticalAlignment="Top" Grid.Row="2"/>
+            <TextBlock Grid.Column="2" Text="出站设备编号：" Height="20" RenderTransformOrigin="1,0.792" Margin="15,17,10,0" VerticalAlignment="Top" Grid.Row="3"/>
+            <TextBlock Grid.Column="4" Text="备用字段：" Height="20" RenderTransformOrigin="1,0.792" Margin="20,20,6,0" VerticalAlignment="Top"/>
+            <TextBlock Grid.Column="4" Text="设备工厂代码：" Height="20" RenderTransformOrigin="1,0.792" Margin="15,20,10,0" VerticalAlignment="Top" Grid.Row="1"/>
+            <TextBlock Grid.Column="4" Text="设备接口标示：" Height="20" RenderTransformOrigin="1,0.792" Margin="15,20,10,0"  VerticalAlignment="Top" Grid.Row="2"/>
+            <TextBlock Grid.Column="4" Text="设备设备编号：" Height="20" RenderTransformOrigin="1,0.792" Margin="15,20,10,0"  VerticalAlignment="Top" Grid.Row="3"/>
+
+            <TextBox x:Name="txtAccountr"   xly:ControlAttachProperty.Watermark="请输入账户" Grid.Column="1" Text="{Binding Account}" Width="Auto" Margin="10,0,20,12" Height="30" VerticalAlignment="Bottom" />
+            <PasswordBox x:Name="txtPwd"    local:PasswordBoxHelper.Password="{Binding Pwd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  xly:ControlAttachProperty.Watermark="请输入密码" Grid.Column="3" Width="Auto" Margin="10,0,20,12" Height="30" VerticalAlignment="Bottom" />
+            <TextBox x:Name="txtInSite"  InputMethod.IsInputMethodEnabled="False" xly:ControlAttachProperty.Watermark="请输入入站工厂代码" Grid.Column="1" Text="{Binding InSite}" Width="Auto" Margin="10,0,20,12" Height="30" Grid.Row="1" VerticalAlignment="Bottom" />
+            <TextBox x:Name="txtInServiceCode" xly:ControlAttachProperty.Watermark="请输入入站接口标示"  Grid.Column="1" Text="{Binding InServiceCode}" Width="Auto" Margin="10,14,20,12" Grid.Row="2" VerticalAlignment="Stretch" />
+            <TextBox x:Name="txtInRESOURCE"  InputMethod.IsInputMethodEnabled="False" xly:ControlAttachProperty.Watermark="请输入入站设备编号" Grid.Column="1" Text="{Binding InRESOURCE}" Width="Auto" Margin="10,0,20,9" Height="30" VerticalAlignment="Bottom" Grid.Row="3" />
+
+            <TextBox x:Name="txtOutSite"  InputMethod.IsInputMethodEnabled="False" xly:ControlAttachProperty.Watermark="请输入出站工厂代码" Grid.Column="3" Text="{Binding OutSite}" Width="Auto" Margin="10,0,20,12" Height="30" Grid.Row="1" VerticalAlignment="Bottom" />
+            <TextBox x:Name="txtOutServiceCode"  Grid.Column="3" Text="{Binding OutServiceCode}"  xly:ControlAttachProperty.Watermark="请输入出站接口标示"  Width="Auto" Margin="10,0,20,12" Height="30" Grid.Row="2" VerticalAlignment="Bottom" />
+            <TextBox x:Name="txtOutRESOURCE"  InputMethod.IsInputMethodEnabled="False" xly:ControlAttachProperty.Watermark="请输入出站设备编号" Grid.Column="3" Text="{Binding OutRESOURCE}" Width="Auto" Margin="10,0,20,12" Height="30" VerticalAlignment="Bottom" Grid.Row="3" />
+
+            <TextBox x:Name="txtRemark"  Grid.Column="5" Text="{Binding Remark}" Width="Auto" Margin="10,0,20,12" Height="30" VerticalAlignment="Bottom" />
+            <TextBox x:Name="txtEqSite"  InputMethod.IsInputMethodEnabled="False" xly:ControlAttachProperty.Watermark="请输入设备工厂代码" Grid.Column="5" Text="{Binding EqSite}" Width="Auto" Margin="10,0,20,12" Height="30" Grid.Row="1" VerticalAlignment="Bottom" />
+            <TextBox x:Name="txtEqServiceCode"  Grid.Column="5" Text="{Binding EqServiceCode}"  xly:ControlAttachProperty.Watermark="请输入设备接口标示"  Width="Auto" Margin="10,0,20,12" Height="30" Grid.Row="2" VerticalAlignment="Bottom" />
+            <TextBox x:Name="txtEqRESOURCE"  InputMethod.IsInputMethodEnabled="False" xly:ControlAttachProperty.Watermark="请输入设备设备编号" Grid.Column="5" Text="{Binding EqRESOURCE}" Width="Auto" Margin="10,0,20,12" Height="30" VerticalAlignment="Bottom" Grid.Row="3" />
+        </Grid>
+
+
+    </Canvas>
+</controls:BasePage>

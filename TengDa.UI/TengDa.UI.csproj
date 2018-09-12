@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E01A2131-73A2-49DA-BC4F-B2B70975E88C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TengDa.UI</RootNamespace>
+    <AssemblyName>TengDa.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DynamicDataDisplay, Version=0.3.0.0, Culture=neutral, PublicKeyToken=5b7d744a7263923f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\DynamicDataDisplay.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>dll\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts, Version=0.9.5.0, Culture=neutral, PublicKeyToken=c5935629d38af058, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf">
+      <HintPath>dll\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Windows.Shell, Version=6.0.147.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.Windows.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=1.2.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="OmronPLC, Version=4.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TengDa.PLC\bin\Debug\OmronPLC.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Utility, Version=3.0.0.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\System.Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TengDa.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\TengDa.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\WPFToolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="ChuckingManager\ChuckingDetailDialog.xaml.cs">
+      <DependentUpon>ChuckingDetailDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChuckingManager\ChuckingDialog.xaml.cs">
+      <DependentUpon>ChuckingDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChuckingManager\ChuckingInfoPage.xaml.cs">
+      <DependentUpon>ChuckingInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MESManager\MESInfoPage.xaml.cs">
+      <DependentUpon>MESInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MessageBox\CustomMessageBox.cs" />
+    <Compile Include="MessageBox\CustomMessageBoxWindow.xaml.cs">
+      <DependentUpon>CustomMessageBoxWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MonitorView\HistoryErrorPage.xaml.cs">
+      <DependentUpon>HistoryErrorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MonitorView\HistoryTemPage.xaml.cs">
+      <DependentUpon>HistoryTemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MonitorView\MainMonitorPage.xaml.cs" />
+    <Compile Include="MonitorView\MANUDebuggingPage.xaml.cs">
+      <DependentUpon>MANUDebuggingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MonitorView\RunLogPage.xaml.cs">
+      <DependentUpon>RunLogPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MonitorView\TemperaturePage.xaml.cs">
+      <DependentUpon>TemperaturePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RobotUserControl.xaml.cs">
+      <DependentUpon>RobotUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="ValueConvert\VCBerthPositionConvertName.cs" />
+    <Compile Include="ValueConvert\VCCreateTypeConvertName..cs" />
+    <Compile Include="ValueConvert\VCItemIsCheckedColor.cs" />
+    <Compile Include="ValueConvert\VCPLCStateConvertName.cs" />
+    <Compile Include="ValueConvert\VCPPMStateConvertName.cs" />
+    <Compile Include="ValueConvert\VCRoleConvertName.cs" />
+    <Compile Include="ValueConvert\VCYesOrNoConvertName.cs" />
+    <Compile Include="Views\ChangePasswordDialog.xaml.cs">
+      <DependentUpon>ChangePasswordDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PersonalInfoEditDialog.xaml.cs">
+      <DependentUpon>PersonalInfoEditDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PersonalInfoPage.xaml.cs" />
+    <Compile Include="Views\RoleAddDialog.xaml.cs">
+      <DependentUpon>RoleAddDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RoleManagerPage.xaml.cs" />
+    <Compile Include="Views\UserAddDialog.xaml.cs" />
+    <Compile Include="Views\UserEditDialog.xaml.cs">
+      <DependentUpon>UserEditDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserManagerPage.xaml.cs" />
+    <Page Include="ChuckingManager\ChuckingDetailDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChuckingManager\ChuckingDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChuckingManager\ChuckingInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="MESManager\MESInfoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MessageBox\CustomMessageBoxWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MonitorView\HistoryErrorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MonitorView\HistoryTemPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MonitorView\MainMonitorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MonitorView\MANUDebuggingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MonitorView\RunLogPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MonitorView\TemperaturePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RobotUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\NavBarStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\BaseStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\HomeStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ListBoxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ChangePasswordDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PersonalInfoEditDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PersonalInfoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RoleAddDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RoleManagerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserAddDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserEditDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserManagerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PasswordBoxHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="NLog.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TengDa.Common\TengDa.Common.csproj">
+      <Project>{6b792cd9-9dc9-4b58-a8ba-143f49375ca4}</Project>
+      <Name>TengDa.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TengDa.Communication\TengDa.Communication.csproj">
+      <Project>{1505d991-7148-40c2-91d3-1590bba41741}</Project>
+      <Name>TengDa.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TengDa.Core\TengDa.Core.csproj">
+      <Project>{7b5b2245-5066-4f4b-a991-a67187d5f24c}</Project>
+      <Name>TengDa.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TengDa.DB\TengDa.DB.csproj">
+      <Project>{5b012acc-bb91-4a75-a5fb-8d73424ce693}</Project>
+      <Name>TengDa.DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TengDa.Models\TengDa.Model.csproj">
+      <Project>{2315eca8-c61c-4e90-be08-b5fdf7584042}</Project>
+      <Name>TengDa.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TengDa.UserControls\TengDa.UserControls.csproj">
+      <Project>{b57adea7-4efc-41de-ad9d-20b1cb4390b3}</Project>
+      <Name>TengDa.UserControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TengDa.ViewModel\TengDa.ViewModel.csproj">
+      <Project>{926b44d5-8f8c-41f9-8afd-35ec9ac4811b}</Project>
+      <Name>TengDa.ViewModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TengDa.WebService\TengDa.WebService.csproj">
+      <Project>{f944790c-05a8-48aa-8d38-06c93c9812f9}</Project>
+      <Name>TengDa.WebService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Util.Controls\Util.Controls.csproj">
+      <Project>{343f577e-6388-442c-b725-2ea6893ab221}</Project>
+      <Name>Util.Controls</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dll\DynamicDataDisplay.dll" />
+    <Content Include="dll\LiveCharts.dll" />
+    <Content Include="dll\LiveCharts.Wpf.dll" />
+    <Content Include="dll\Microsoft.Expression.Controls.dll" />
+    <Content Include="dll\Microsoft.Expression.Drawing.dll" />
+    <Content Include="dll\Microsoft.Expression.Effects.dll" />
+    <Content Include="dll\Microsoft.Expression.Interactions.dll" />
+    <Content Include="dll\Microsoft.Expression.Prototyping.Interactivity.dll" />
+    <Content Include="dll\Microsoft.Windows.Shell.dll" />
+    <Content Include="dll\NPOI.dll" />
+    <Content Include="dll\OmronPLC.dll" />
+    <Content Include="dll\PagedList.dll" />
+    <Content Include="dll\PresentationFramework.dll" />
+    <Content Include="dll\System.Utility.dll" />
+    <Content Include="dll\System.Windows.Controls.DataVisualization.Toolkit.VisualStudio.Design.4.0.dll" />
+    <Content Include="dll\System.Windows.Forms.DataVisualization.dll" />
+    <Content Include="dll\System.Windows.Interactivity.dll" />
+    <Content Include="dll\WindowsBase.dll" />
+    <Content Include="dll\WPFToolkit.dll" />
+    <Resource Include="image\bck.png" />
+    <Resource Include="image\error.png" />
+    <Resource Include="image\alert.png" />
+    <Resource Include="image\question.png" />
+    <Resource Include="image\MainPageImg.png" />
+    <Resource Include="image\mainPage.png" />
+    <Resource Include="image\Main.png" />
+    <Resource Include="image\more.png" />
+    <Resource Include="image\20180502105433.png" />
+    <Resource Include="image\tab_header.png" />
+    <Resource Include="image\right_panel_border.png" />
+    <Resource Include="image\file.png" />
+    <Resource Include="image\dialog_close.png" />
+    <Resource Include="image\menu_child_button_bg.png" />
+    <Resource Include="image\menu_button_bg.png" />
+    <Resource Include="image\bg.png" />
+    <Resource Include="image\32\login_32.png" />
+    <Resource Include="image\32\Close_32.png" />
+    <Resource Include="image\32\browser-minimise-2.png" />
+    <Resource Include="image\32\login.png" />
+    <Resource Include="image\32\Close.png" />
+    <Resource Include="image\Background.png" />
+    <Resource Include="image\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

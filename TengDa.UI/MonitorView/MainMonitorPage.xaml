@@ -1,0 +1,48 @@
+﻿<controls:BasePage x:Class="TengDa.UI.MainMonitorPage"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:local="clr-namespace:TengDa.UI"
+                   xmlns:vc="clr-namespace:TengDa.UI.ValueConvert"
+                   xmlns:controls="clr-namespace:TengDa.UserControls;assembly=TengDa.UserControls"
+                      xmlns:xly="clr-namespace:Util.Controls;assembly=Util.Controls"
+                   Loaded="Page_Loaded" Title="MainMonitorPage"  Unloaded="Page_UnLoaded">
+    <FrameworkElement.Resources>
+        <vc:VCRoleConvertName x:Key="vcRole"/>
+    </FrameworkElement.Resources>
+    <Canvas Name="canvas">
+        <Border CornerRadius="20,20,20,20" Background="#FF2B2DB4" Height="Auto" Canvas.Left="350" Canvas.Top="160" x:Name="bgImg">
+            <Canvas x:Name="header" Style="{StaticResource TabHeaderStyle1}">
+                <Label Style="{StaticResource TabTitleStyle1}" Content="设备监控"/>
+
+
+            </Canvas>
+        </Border>
+        <Image Style="{StaticResource RightPanelBorder}" Stretch="Fill"  />
+        <Grid Canvas.Left="1240" Canvas.Top="165" Width="215">
+            <TextBlock Text="监控内容:" Margin="10,5,140,5"></TextBlock>
+            <ComboBox x:Name="comTepy" Margin="85,0,7,0" Width="Auto" SelectedIndex="0"></ComboBox>
+        </Grid>
+        <Grid >
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+        </Grid>
+        <Grid Width="1172" Background="Transparent" Height="570" Canvas.Left="342" Canvas.Top="220" >
+            <ScrollViewer x:Name="scrollBar" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,5,0,0" >
+                <Grid x:Name="MainView" >
+
+                </Grid>
+
+            </ScrollViewer>
+
+        </Grid>
+
+    </Canvas>
+</controls:BasePage>
