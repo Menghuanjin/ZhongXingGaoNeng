@@ -177,7 +177,7 @@ namespace TengDa.UI
 
                 if (fixtureFurnaceDetaiViewModel != null)
                 {
-                    if ((new FixtureFurnaceDetailDB()).Delete(fixtureFurnaceDetaiViewModel.FFMId) < 1)
+                    if ((new FixtureFurnaceDetailDB()).Delete(fixtureFurnaceDetaiViewModel.FFDId) < 1)
                     {
                         CustomMessageBox.Show("删除数据过程出现错误！", CustomMessageBoxButton.OKCancel, CustomMessageBoxIcon.Question);
                         return;
