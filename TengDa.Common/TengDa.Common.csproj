@@ -118,6 +118,7 @@
     <Compile Include="OperateEntity.cs" />
     <Compile Include="PingHelp.cs" />
     <Compile Include="ReflectionControl.cs" />
+    <Compile Include="SystemEnum.cs" />
     <Compile Include="WCFHelper.cs" />
     <Compile Include="WebServiceHelper.cs" />
     <Compile Include="XmlHelp.cs" />

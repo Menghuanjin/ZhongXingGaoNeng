@@ -84,5 +84,28 @@ namespace TengDa.Communication
             }
             return List;
         }
+        /// <summary>
+        ///  读多个寄存器转换状态
+        /// </summary>
+        /// <param name="omronPLC"></param>
+        /// <param name="Address">地址</param>
+        /// <param name="value">值</param>
+        /// <returns></returns>
+        public static List<string> ReadMultiToEnum(OmronPLC_tcp omronPLC, int Address, int value)
+        {
+            List<string> List = new List<string> { };
+            ushort[] us = new ushort[value];
+            lock (TengDa.Communication.PCLock.Locker)
+            {
+                omronPLC.ReadDMs(Convert.ToUInt16(Address), ref us, Convert.ToUInt16(value));
+            }
+            foreach (var item in us)
+            {
+                TengDa.Common.SystemEnum.MacChuStatus ss = (TengDa.Common.SystemEnum.MacChuStatus)Convert.ToInt16(item);
+                string description = TengDa.Common.EnumHelper.GetDescription(ss);
+                List.Add(description);
+            }
+            return List;
+        }
     }
 }
