@@ -10,6 +10,8 @@ namespace TengDa.Common
 {
     public static class EnumHelper
     {
+
+
         /// <summary>
         /// 扩展方法，获得枚举的Description
         /// </summary>
@@ -83,4 +85,6 @@ namespace TengDa.Common
             return null;
         }
     }
+
+    
 }
