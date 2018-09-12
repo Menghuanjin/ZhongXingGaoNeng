@@ -325,12 +325,12 @@ namespace TengDa.UI
             var fixtureFurnaceDetailList = fixtureFurnaceDetailDB.GetAllDataByFFDID(FFMID);
             for (int i = 0; i < fixtureFurnaceDetailList.Count(); i++)
             {
-             
+
 
                 if (!string.IsNullOrEmpty(fixtureFurnaceDetailList[i].CABarCode))
                 {
                     model.TempBtnData[i / 2].IsShow = true;
-                    model.TempBtnData[i / 2].ProgressText =  string.Format("{0}% ", 70);
+                    model.TempBtnData[i / 2].ProgressText = string.Format("{0}% ", 70);
                     model.TempBtnData[i / 2].ProgressValue = 90;
                     model.TempBtnData[i / 2].ProgressTitel = string.Format("完成{0}% 剩余{1}min", 70, 100);
                 }
@@ -346,7 +346,7 @@ namespace TengDa.UI
                     }
                     else//左边按钮赋值
                     {
-                           int SS = Convert.ToInt32(fixtureFurnaceDetailList[i].FFDLayer) - 3;
+                        int SS = Convert.ToInt32(fixtureFurnaceDetailList[i].FFDLayer) - 3;
                         model.TempBtnData[Convert.ToInt32(fixtureFurnaceDetailList[i].FFDLayer) - 1].AheadBtnInfo.TempNum = fixtureFurnaceDetailList[i].CABarCode;
                         model.TempBtnData[Convert.ToInt32(fixtureFurnaceDetailList[i].FFDLayer) - 1].AheadBtnInfo.ToolTipText = fixtureFurnaceDetailList[i].CABarCode;
                         //model.TempBtnData[Convert.ToInt32(fixtureFurnaceDetailListByNumber[i].FFDLayer) - 1].BackBtnInfo = SetButtonState(Convert.ToInt32(fixtureFurnaceDetailListByNumber[i].FFDState), fixtureFurnaceDetailListByNumber[i].CABarCode);
@@ -355,17 +355,23 @@ namespace TengDa.UI
                 }
                 else if (this.comTepy.SelectedIndex == 1)
                 {
-                    if (fixtureFurnaceDetailList[i].FFDNumber % 2 == 0)//右边按钮赋值
+                    string sss = fixtureFurnaceDetailList[i].FFMName.Substring(0, 1);
+                    if (TengDa.Communication.DataSource.ChuckingStatus[Convert.ToInt16(fixtureFurnaceDetailList[i].FFMName.Substring(0, 1)) - 1] != null)
                     {
-                        int SS = Convert.ToInt32(fixtureFurnaceDetailList[i].FFDLayer) - 1;
-                        model.TempBtnData[Convert.ToInt32(fixtureFurnaceDetailList[i].FFDLayer) - 1].BackBtnInfo.TempNum = "111111";
-                        model.TempBtnData[Convert.ToInt32(fixtureFurnaceDetailList[i].FFDLayer) - 1].BackBtnInfo.ToolTipText = fixtureFurnaceDetailList[i].CABarCode;
-                    }
-                    else
-                    {
-                        int SS = Convert.ToInt32(fixtureFurnaceDetailList[i].FFDLayer) - 1;
-                        model.TempBtnData[Convert.ToInt32(fixtureFurnaceDetailList[i].FFDLayer) - 1].AheadBtnInfo.TempNum ="6666";
-                        model.TempBtnData[Convert.ToInt32(fixtureFurnaceDetailList[i].FFDLayer) - 1].AheadBtnInfo.ToolTipText = fixtureFurnaceDetailList[i].CABarCode;
+                        if (fixtureFurnaceDetailList[i].FFDNumber % 2 == 0)//右边按钮赋值
+                        {
+                            string SS = TengDa.Communication.DataSource.ChuckingStatus[Convert.ToInt16(fixtureFurnaceDetailList[i].FFMName.Substring(0, 1)) - 1][i];
+                            model.TempBtnData[Convert.ToInt32(fixtureFurnaceDetailList[i].FFDLayer) - 1].BackBtnInfo.TempNum = TengDa.Communication.DataSource.ChuckingStatus[Convert.ToInt16(fixtureFurnaceDetailList[i].FFMName.Substring(0, 1)) - 1][i];
+                            model.TempBtnData[Convert.ToInt32(fixtureFurnaceDetailList[i].FFDLayer) - 1].BackBtnInfo.ToolTipText = fixtureFurnaceDetailList[i].CABarCode;
+                        }
+                        else
+                        {
+                            string SS = TengDa.Communication.DataSource.ChuckingStatus[Convert.ToInt16(fixtureFurnaceDetailList[i].FFMName.Substring(0, 1)) - 1][i];
+
+                            model.TempBtnData[Convert.ToInt32(fixtureFurnaceDetailList[i].FFDLayer) - 1].AheadBtnInfo.TempNum = TengDa.Communication.DataSource.ChuckingStatus[Convert.ToInt16(fixtureFurnaceDetailList[i].FFMName.Substring(0, 1)) - 1][i];
+                            model.TempBtnData[Convert.ToInt32(fixtureFurnaceDetailList[i].FFDLayer) - 1].AheadBtnInfo.ToolTipText = fixtureFurnaceDetailList[i].CABarCode;
+                        }
+
                     }
                 }
             }
