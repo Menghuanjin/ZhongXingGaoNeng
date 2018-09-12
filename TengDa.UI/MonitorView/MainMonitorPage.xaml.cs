@@ -346,7 +346,7 @@ namespace TengDa.UI
                     }
                     else//左边按钮赋值
                     {
-                           int SS = Convert.ToInt32(fixtureFurnaceDetailList[i].FFDLayer) - 1;
+                           int SS = Convert.ToInt32(fixtureFurnaceDetailList[i].FFDLayer) - 2;
                         model.TempBtnData[Convert.ToInt32(fixtureFurnaceDetailList[i].FFDLayer) - 1].AheadBtnInfo.TempNum = fixtureFurnaceDetailList[i].CABarCode;
                         model.TempBtnData[Convert.ToInt32(fixtureFurnaceDetailList[i].FFDLayer) - 1].AheadBtnInfo.ToolTipText = fixtureFurnaceDetailList[i].CABarCode;
                         //model.TempBtnData[Convert.ToInt32(fixtureFurnaceDetailListByNumber[i].FFDLayer) - 1].BackBtnInfo = SetButtonState(Convert.ToInt32(fixtureFurnaceDetailListByNumber[i].FFDState), fixtureFurnaceDetailListByNumber[i].CABarCode);
