@@ -140,7 +140,7 @@ namespace TengDa.Communication
 
                 TengDa.Communication.DataSource.timeListC[get] = TengDa.Communication.OMRONPLCAddress.ReadDM( TengDa.Communication.SocketBLL.bakingContent[get], "3643");
 
-                TengDa.Communication.DataSource.ChuckingStatus[get] = TengDa.Communication.OMRONPLCAddress.ReadMulti(TengDa.Communication.SocketBLL.bakingContent[get], 5001, 6); //每一台机夹具状态
+                TengDa.Communication.DataSource.ChuckingStatus[get] = TengDa.Communication.OMRONPAnalyzeDMHelp.ReadMultiToEnum(TengDa.Communication.SocketBLL.bakingContent[get], 5001, 6); //每一台机夹具状态
                 //真空
                 List<string> list1 = TengDa.Communication.OMRONPLCAddress.ReadMulti( TengDa.Communication.SocketBLL.bakingContent[get], 3601, 2);
 
